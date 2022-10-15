@@ -313,7 +313,6 @@ def upstairs():
 
 def main():
     game_running = True
-    next_location = ""
     scary_game_soq()
     next_location = start_of_game()
     while game_running == True:
