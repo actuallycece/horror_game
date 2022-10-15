@@ -4,6 +4,18 @@ house_power = False
 have_key = False
 have_note = False
 
+def get_user_selection(valid_options):
+    options_to_show_user = " | ".join(valid_options)
+    waiting_for_user_selection = True
+    while waiting_for_user_selection:
+        print(options_to_show_user)
+        user_input = input("")
+        if user_input in valid_options:
+            waiting_for_user_selection = False
+            return user_input
+        else:
+            print("Invalid option")
+
 def scary_game_soq():
     global user_name
     print("The House Abandoned")
@@ -18,18 +30,14 @@ def scary_game_soq():
             user_sure_name = True
         elif user_sure == "no":
             user_sure_name = False
-    soq = False
-    while soq == False:
-        print("start or quit")
-        scary_soq = input("")
-        scary_soq = scary_soq.lower()
-        if scary_soq == "start":
-            soq = True
-            return
-        elif scary_soq == "quit":
-            exit()
-        else:
-            print("Invalid Option")
+    print("start or quit")
+    valid_options = ["start","quit"]
+    scary_soq = get_user_selection(valid_options)
+    if scary_soq == "start":
+        soq = True
+        return
+    elif scary_soq == "quit":
+        exit()
 
 def in_car():
     global next_location
@@ -40,84 +48,29 @@ def in_car():
     user_response = input("")
     print("You pull up to the driveway and are reminded of what this house used to be. You remember the white railing that went along the front porch. The blue siding of the house with the complementary red door. The two chairs that Ma and Pa used to read every Saturday morning in. The grass would never grow no matter what Ma's friends put on it. All tied together with a fence that used to keep Charlie, your old dog, inside.")
     print("look around | get out of car")
-    user_next_move = False
-    while user_next_move == False:
-        user_car = input("")
-        user_car = user_car.lower()
-        if user_car == "look around":
-            user_next_move = True
-            print("You see a glovebox, the car keys, and you can also see the generator on the side of the house.")
-            print("open glovebox | get out of car")
-            user_in_car = False
-            while user_in_car == False:
-                user_look_car = input("")
-                user_look_car = user_look_car.lower()
-                if user_look_car == "open glovebox":
-                    user_in_car = True
-                    print("You open the glovebox and see keys on a key ring along a note with some napkins and documents.")
-                    print("Take the Keys?")
-                    user_take_key = input("")
-                    if user_take_key == "yes":
-                        print("You take the keys hoping they're the keys for the house, you don't remember for some reason")
-                        have_key = True
-                        print("Would you like to take the note?")
-                        take_note = input("")
-                        user_take_note = False
-                        while user_take_note == False:
-                            if take_note == "yes":
-                                user_take_note = True
-                                have_note = True
-                                print("You take the 'Note' it feels weird in your hands")
-                                print("Read note?")
-                                read_note = input("")
-                                if read_note == "yes":
-                                    print("You open the old crumbled note and it reads:")
-                                    print("Hey Son, welcome back, weve missed you! Theres still Thanksgiving dinner out for you along with your favorite game in your room. Dont forget to turn the generator on the side of the side. We love you - Ma and Pa")
-                                    print("You crumble the note into your pocket")
-                                    user_response = input("")
-                                    print("Get out of the car?")
-                                    get_out_of_car = input("")
-                                    if get_out_of_car == "yes":
-                                        return "outside"
-                                elif read_note == "no":
-                                    print("You decide not to read the note as it already makes you uncomfertable.")
-                                    print("Get out of the car?")
-                                    get_out_of_car = input("")
-                                    if get_out_of_car == "yes":
-                                        return "outside"
-                            elif take_note == "no":
-                                user_take_note = True
-                                have_note = False
-                                print("Get out of the car?")
-                                get_out_of_car = input("")
-                                if get_out_of_car == "yes":
-                                    return "outside"
-                                else:
-                                    print("you have to progress.")
-                                    print("Get out of the car?")
-                                    needs_too_get_out = False
-                                    while needs_too_get_out == False:
-                                        print ("Get out of the car?")
-                                        get_out_of_car = input("")
-                                        get_out_of_car = get_out_of_car.lower()
-                                        if get_out_of_car == "yes":
-                                            needs_too_get_out = True
-                                            return "outside"
-                                        elif get_out_of_car == "no":
-                                            needs_too_get_out = False
-                                            print("invalid response")
-                                        else:
-                                            print("invalid response")
-                            else:
-                                user_take_note = False
-                                print("invalid response")
-                                print("Would you like to take the note?")
-                    elif user_take_key == "no":
-                        print("you dont take the keys for some reason hoping they arent important and continue to do what you were doing.")
-                        have_key = False
-                        print("Would you like to take the note?")
-                        take_note = input("")
+    valid_options = ["look around","get out of car"]
+    user_car = get_user_selection(valid_options)
+    if user_car == "look around":
+        print("You see a glovebox, the car keys, and you can also see the generator on the side of the house.")
+        print("open glovebox | get out of car")
+        user_in_car = False
+        while user_in_car == False:
+            user_look_car = input("")
+            user_look_car = user_look_car.lower()
+            if user_look_car == "open glovebox":
+                user_in_car = True
+                print("You open the glovebox and see keys on a key ring along a note with some napkins and documents.")
+                print("Take the Keys?")
+                user_take_key = input("")
+                if user_take_key == "yes":
+                    print("You take the keys hoping they're the keys for the house, you don't remember for some reason")
+                    have_key = True
+                    print("Would you like to take the note?")
+                    take_note = input("")
+                    user_take_note = False
+                    while user_take_note == False:
                         if take_note == "yes":
+                            user_take_note = True
                             have_note = True
                             print("You take the 'Note' it feels weird in your hands")
                             print("Read note?")
@@ -125,13 +78,11 @@ def in_car():
                             if read_note == "yes":
                                 print("You open the old crumbled note and it reads:")
                                 print("Hey Son, welcome back, weve missed you! Theres still Thanksgiving dinner out for you along with your favorite game in your room. Dont forget to turn the generator on the side of the side. We love you - Ma and Pa")
+                                print("You crumble the note into your pocket")
                                 user_response = input("")
-                                print("You cumble the note into your pocket")
-                                print("Go inside the house?")
-                                user_response = input("")
-                                if user_response == "yes":
-                                    return "inside house"
-                                elif user_response == "no":
+                                print("Get out of the car?")
+                                get_out_of_car = input("")
+                                if get_out_of_car == "yes":
                                     return "outside"
                             elif read_note == "no":
                                 print("You decide not to read the note as it already makes you uncomfertable.")
@@ -139,22 +90,71 @@ def in_car():
                                 get_out_of_car = input("")
                                 if get_out_of_car == "yes":
                                     return "outside"
-                                elif get_out_of_car == "no":
-                                    return "inside car"
-                elif user_look_car == "get out of car":
-                    user_in_car = True
-                    return "outside"
-                else:
-                    user_in_car = False
-                    print("invalid response")
-                    print("open glovebox | get out of car")
-        elif user_car == "get out of car":
-            user_next_move = True
-            return "outside"
-        else:
-            user_next_move = False
-            print("invalid response")
-            print("look around | get out of car")
+                        elif take_note == "no":
+                            user_take_note = True
+                            have_note = False
+                            print("Get out of the car?")
+                            get_out_of_car = input("")
+                            if get_out_of_car == "yes":
+                                return "outside"
+                            else:
+                                print("you have to progress.")
+                                print("Get out of the car?")
+                                needs_too_get_out = False
+                                while needs_too_get_out == False:
+                                    print ("Get out of the car?")
+                                    get_out_of_car = input("")
+                                    get_out_of_car = get_out_of_car.lower()
+                                    if get_out_of_car == "yes":
+                                        needs_too_get_out = True
+                                        return "outside"
+                                    elif get_out_of_car == "no":
+                                        needs_too_get_out = False
+                                        print("invalid response")
+                                    else:
+                                        print("invalid response")
+                        else:
+                            user_take_note = False
+                            print("invalid response")
+                            print("Would you like to take the note?")
+                elif user_take_key == "no":
+                    print("you dont take the keys for some reason hoping they arent important and continue to do what you were doing.")
+                    have_key = False
+                    print("Would you like to take the note?")
+                    take_note = input("")
+                    if take_note == "yes":
+                        have_note = True
+                        print("You take the 'Note' it feels weird in your hands")
+                        print("Read note?")
+                        read_note = input("")
+                        if read_note == "yes":
+                            print("You open the old crumbled note and it reads:")
+                            print("Hey Son, welcome back, weve missed you! Theres still Thanksgiving dinner out for you along with your favorite game in your room. Dont forget to turn the generator on the side of the side. We love you - Ma and Pa")
+                            user_response = input("")
+                            print("You cumble the note into your pocket")
+                            print("Go inside the house?")
+                            user_response = input("")
+                            if user_response == "yes":
+                                return "inside house"
+                            elif user_response == "no":
+                                return "outside"
+                        elif read_note == "no":
+                            print("You decide not to read the note as it already makes you uncomfertable.")
+                            print("Get out of the car?")
+                            get_out_of_car = input("")
+                            if get_out_of_car == "yes":
+                                return "outside"
+                            elif get_out_of_car == "no":
+                                return "inside car"
+            elif user_look_car == "get out of car":
+                user_in_car = True
+                return "outside"
+            else:
+                user_in_car = False
+                print("invalid response")
+                print("open glovebox | get out of car")
+    elif user_car == "get out of car":
+        return "outside"
 
 
 def house_has_power():
@@ -265,9 +265,46 @@ def living_room():
 
 
 def dining_room():
-    print("")
+    print("The dining room has the same carpet as the living room, with a long table, five chairs, and six placemats. There's a Turkey in the middle of the table, along with some greens, sweet potato pie, ham, mashed potatoes, corn, and candy yams.")
+    print("Eat Thankgiving dinner?")
+    etd = False
+    lok = False
+    while etd == False:
+        user_etd = input("")
+        if user_etd == "yes":
+            etd = True
+            print("You take a bite of the ham; it's gross. It tastes like roadkill. ")
+            print("go into: living room | kitchen")
+            while lok == False:
+                user_lok = input("")
+                if user_lok == "living room":
+                    lok = True
+                    return "inside living room"
+                elif user_lok == "kitchen":
+                    lok = True
+                    return "inside kitchen"
+                else:
+                    print("invalid repsonse")
+        elif user_etd == "no":
+            etd = True
+            print("You decide not to eat the rotten food, it looks like its been a couple years anyways.")
+            print("go into: living room | kitchen")
+            while lok == False:
+                user_lok = input("")
+                if user_lok == "living room":
+                    lok = True
+                    return "inside living room"
+                elif user_lok == "kitchen":
+                    lok = True
+                    return "inside kitchen"
+                else:
+                    print("invalid repsonse")
 
+        else:
+            etd = False
+            print("invalid respose")
 
+        
 def kitchen():
     print("")
 
@@ -304,8 +341,8 @@ def main():
             next_location = user_outside()
         elif next_location == "inside house":
             next_location = inside_house()
-        elif next_location == "inside entryway"
-        next_location = entryway()
+        elif next_location == "inside entryway":
+              next_location = entryway()
         elif next_location == "inside living room":
             next_location = living_room()
         elif next_location == "inside kitchen":
