@@ -1,4 +1,5 @@
 from logging import _FormatStyle
+from re import U
 
 
 user_name = ""
@@ -53,149 +54,133 @@ def in_car():
     global next_location
     global have_key
     global have_note
-
     valid_options = ["look around","get out of car"]
     user_car = get_user_selection(valid_options)
     if user_car == "look around":
         print("You see a glovebox, the car keys, and you can also see the generator on the side of the house.")
-        valid_options = ["open glove","get out of car"]
+        valid_options = ["open glovebox","get out of car"]
         user_look_car = get_user_selection
         if user_look_car == "open glovebox":
-            print("You open the glovebox and see keys on a key ring along a note with some napkins and documents.")
-            print("Take the Keys?")
-            valid_options = ["yes","no"]
+            print("You open the glovebox and see 'keys' on a key ring along a 'note' with some napkins and documents.")
+            print("Take the:")
+            valid_options = ["keys","note","none"]
             user_take_key = get_user_selection(valid_options)
-            if user_take_key == "yes":
-                print("You take the keys hoping they're the keys for the house, you don't remember for some reason")
-                print("Would you like to take the note?")
-                valid_options = ["yes","no"]
-                take_note = get_user_selection(valid_options)
-                if take_note == "yes":
-                    have_note = True
-                    print("You take the 'Note' it feels weird in your hands.")
-                    print("Read note?")
-                    valid_options = ["yes","no"]
-                    read_note = get_user_selection(valid_options)
-                    if read_note == "yes":
-                        print("You open the old, crumbled, alcohol-smelling note, and it reads:")
-                        print("Hey Son, welcome back; we've missed you! There's Thanksgiving dinner out for you, along with your favorite game in your room. Don't forget to turn the generator on the side of the side. We love you - Ma and Pa")
-                        user_response = input("")
-                        print("You crumble the note into your pocket")
-                        user_response = input("")
-                        print("Get out of the car?")
-                        valid_options = ["yes","no"]
-                        get_out_of_car = get_user_selection(valid_options)
-                        if get_out_of_car == "yes":
-                            return "outside"
-                        elif get_out_of_car == "no":
-                            return "inside car"
-                    elif read_note == "no":
-                        print("You decide not to read the note as it already makes you uncomfertable.")
-                        print("Get out of the car?")
-                        valid_options = ["yes","no"]
-                        get_out_of_car = get_user_selection(valid_options)
-                        if get_out_of_car == "yes":
-                            return "outside"
-                        elif get_out_of_car == "no":
-                            return "inside car"
-                elif take_note == "no":
-                    have_note = False
-                    print("Get out of the car?")
-                    valid_options = ["yes","no"]
-                    get_out_of_car = get_user_selection(valid_options)
-                    if get_out_of_car == "yes":
-                        return "outside"
-                    elif get_out_of_car == "no":
-                        return "inside car"
-                    else:
-                        return "inside car"
-                else:
-                    return "inside car"
-            elif user_take_key == "no":
-                have_key = False
-                print("you dont take the keys for some reason hoping they arent important and continue to do what you were doing.")
-                print("Would you like to take the note?")
-                valid_options = ["yes","no"]
-                take_note = get_user_selection(valid_options)
-                if take_note == "yes":
-                    have_note = True
-                    print("You take the 'Note' it feels weird in your hands")
-                    print("Read note?")
-                    valid_options = ["yes","no"]
-                    read_note = get_user_selection(valid_options)
-                    if read_note == "yes":
-                        print("You open the old crumbled note and it reads:")
-                        print("Hey Son, welcome back, weve missed you! Theres still Thanksgiving dinner out for you along with your favorite game in your room. Dont forget to turn the generator on the side of the side. We love you - Ma and Pa")
-                        user_response = input("")
-                        print("You cumble the note into your pocket")
-                        print("Go inside the house?")
-                        valid_options = ["yes","no"]
-                        user_response = get_user_selection(valid_options)
-                        if user_response == "yes":
-                            return "inside house"
-                        elif user_response == "no":
-                            return "outside"
-                    elif read_note == "no":
-                        print("You decide not to read the note as it already makes you uncomfertable.")
-                        print("Get out of the car?")
-                        valid_options = ["yes","no"]
-                        get_out_of_car = get_user_selection(valid_options)
-                        if get_out_of_car == "yes":
-                            return "outside"
-                        elif get_out_of_car == "no":
-                            return "inside car"
-        elif user_look_car == "get out of car":
-            return "outside"
-    elif user_car == "get out of car":
-        return "outside"
+            if user_take_key == "keys":
+                return "keys"
+            elif user_take_key == "note":
+                return "car note"
+            elif user_take_key == "none":
+                return "inside car"
+
+
+def get_keys():
+    global next_location
+    global have_key
+    while have_key is False:
+        have_key = True
+        print("You take the keys hoping they're the keys for the house, you don't remember for some reason")
+        print("Would you like to take the 'note'?")          
+        valid_options = ["yes","no"]
+        take_note = get_user_selection(valid_options)
+        if take_note == "yes":
+            return "car note"
+        elif take_note == "no":
+            print("You decide not to read the note as it already makes you uncomfertable.")
+            print("Get out of the car?")
+            valid_options = ["yes","no"]
+            get_out_of_car = get_user_selection(valid_options)
+            if get_out_of_car == "yes":
+                return "outside"
+            elif get_out_of_car == "no":
+                return "inside car"
+    while have_key:
+        print("You've already taken the keys. Would you like to take the note?")
+        valid_options = ["yes","no"]
+        take_note = get_user_selection(valid_options)
+        if take_note == "yes":
+            return "car note"
+        elif take_note == "no":
+            return "inside car"
+
+
+def note_in_car():
+    global next_location
+    global have_note
+    while have_note is False:
+        have_note = True
+        print("You take the 'Note' it feels weird in your hands.")
+        print("Read note?")
+        valid_options = ["yes","no"]
+        read_note = get_user_selection(valid_options)
+        if read_note == "yes":
+            print("You open the old, crumbled, alcohol-smelling note, and it reads:")
+            print("Hey Son, welcome back; we've missed you! There's Thanksgiving dinner out for you, along with your favorite game in your room. Don't forget to turn the generator on the side of the side. We love you - Ma and Pa")
+            user_response = input("")
+            print("You crumble the note into your pocket")
+            user_response = input("")
+            print("Get out of the car?")
+            valid_options = ["yes","no"]
+            get_out_of_car = get_user_selection(valid_options)
+            if get_out_of_car == "yes":
+                return "outside"
+            elif get_out_of_car == "no":
+                return "inside car"
+        elif read_note == "no":
+            print("You decide not to read the note as it already makes you uncomfertable.")
+            print("Get out of the car?")
+            valid_options = ["yes","no"]
+            get_out_of_car = get_user_selection(valid_options)
+            if get_out_of_car == "yes":
+                return "outside"
+            elif get_out_of_car == "no":
+                return "inside car"
 
 
 def house_has_power():
     global house_power
     global next_location
-
-    if house_power == True:
-            print("The house makes a loud 'whirling' sound and boots up like a Windows Home Vista")
-            print("go inside: house | car")
-            valid_options = ["house","car"]
-            user_next_move = get_user_selection(valid_options)
-            if user_next_move == "house":
-                print("You walk up the old and forgotten stairs to the front door, you can see that it still has Ma and Pa's old engravings in it, this reminds you of when they did it, you miss those days.")
-                return "inside house"
-            elif user_next_move == "car":
-                print("You go back into the car as though you forgot something")
-                return "inside car"
-    elif house_power == False:
+    global house_power
+    while house_power:
+        print("You walk along side the high weeds that youve never seen before. Couple of scratches on your shins from the bushes but other than that you continue on to turn on the generator.")
+        print("go inside:")
+        valid_options = ["house","car"]
+        user_next_move = get_user_selection(valid_options)
+        if user_next_move == "house":
+            print("You walk up the old and forgotten stairs to the front door, you can see that it still has Ma and Pa's old engravings in it, this reminds you of when they did it, you miss those days.")
+            return "inside house"
+        elif user_next_move == "car":
+            print("You go back into the car as though you forgot something")
+            return "inside car"
+    while house_power is False:
             print("The house is dark and dim in a way that makes you extremly anxious and this takes over you, you can not enter without turning on the generator.")
             print("Turn on the Generator?")
             valid_options = ["yes","no"]
             tog_again = get_user_selection(valid_options)
             if tog_again == "yes":
-                house_power = True
-                print("You walk along side the high weeds that youve never seen before. Couple of scratches on your shins from the bushes but other than that you continue on to turn on the generator.")
-                print("go inside: house | car")
-                valid_options = ["house","car"]
-                user_next_move = get_user_selection(valid_options)
-                if user_next_move == "house":
-                    return "inside house"
-            if user_next_move == "car":
-                print("You go back into the car as though you forgot something")
-                return "inside car"
+                return "generator"
+            elif tog_again == "no":
+               return "outside"
 
 
 def user_outside():
+    global next_location
     global house_power
-    global have_key
-
-    print("You get out of the car and see the generator to the left of the house.")
-    print("Turn on the Generator?")
-    turn_on_gen = input("")
-    if turn_on_gen == "yes":
-        house_power = True
-        return "generator"
-    elif turn_on_gen == "no":
-        house_power = False
-        return "generator"
+    print("You are outside you can see the 'car' and the 'generator to the left of the house.")
+    print("Go to:")
+    valid_options = ["car","generator"]
+    car_or_gen = get_user_selection(valid_options)
+    if car_or_gen == "car":
+        return "car"
+    elif car_or_gen == "generator":
+        print("Turn on the Generator?")
+        valid_options = ["yes","no"]
+        turn_on_gen = get_user_selection(valid_options)
+        if turn_on_gen == "yes":
+            house_power = True
+            return "generator"
+        elif turn_on_gen == "no":
+            house_power = False
+            return "generator"
 
 
 def inside_house():
@@ -204,23 +189,22 @@ def inside_house():
     global have_note
     global opened_door
     global next_location
-
     print("Open the door?")
     valid_options = ["yes","no"]
     open_the_door = get_user_selection(valid_options)
     if open_the_door == "yes" and have_key == True:
         opened_door = True
         print("It works! You you twist the key and creek open the old rusty door and take in what you see.")
-        print("look around")
-        valid_options = ["yes","no"]
+        print("Look around?")
+        valid_options = ["yes"]
         user_inside_house = get_user_selection(valid_options)
         user_inside_house = input("")
-        if user_inside_house == "look around":
+        if user_inside_house == "yes":
             return "inside entryway"
     elif open_the_door == "yes" and have_key == False:
         opened_door = False
         print("You try to open the door but its locked you think that you may have left the keys in the glovebox")
-        return "inside car"
+        return "outiside"
     elif open_the_door == "no":
         print("Where would you like to go?")
         print("car | generator")
@@ -234,7 +218,6 @@ def inside_house():
 
 def entryway():
     global next_location
-
     print("You look around and are in the entryway with the stairs directly to your left. In front of you, you can see the 'living room' with the old brown couch and TV that you're surprised aren't stolen directly in front of a tv stand. In the 'living room' is the 'kitchen' and 'dining room' with an open entryway to see straight into the dirty abandoned kitchen.")
     print("go into: living room | dining room | upstairs")
     valid_options = ["living room","dining room","upstairs"]
@@ -249,6 +232,7 @@ def entryway():
 
 def living_room():
     global next_location
+    global user_done
 
     print("You walk into the dirty and dingy living room. Red liquid seeped into the carpet everywhere, along with old bottles and plates of food on the coffee table. Aside from the dishes are the TV remote and two coasters with cups on them. The cups are filled with a thick black, tar-like liquid... and smell. This place is nothing like it used to be. ")
     print("go inside: entryway | dining room | kitchen")
@@ -264,7 +248,6 @@ def living_room():
 
 def dining_room():
     global next_location
-
     print("The dining room has the same carpet as the living room, with a long table, five chairs, and six placemats. There's a Turkey in the middle of the table, along with some greens, sweet potato pie, ham, mashed potatoes, corn, and candy yams.")
     print("Eat Thankgiving dinner?")
     valid_options = ["yes","no"]
@@ -295,18 +278,21 @@ def dining_room():
 
 def kitchen():
     global next_location
+    global user_done
     
     print("")
 
 
 def cellar():
     global next_location
+    global user_done
     
     print ("")
 
 
 def upstairs():
     global next_location
+    global user_done
 
     print()
 
@@ -318,6 +304,10 @@ def main():
     while game_running == True:
         if next_location == "inside car":
             next_location = in_car()
+        elif next_location == "keys":
+            next_location = get_keys()
+        elif next_location == "car note":
+            next_location = note_in_car()
         elif next_location == "generator":
             next_location = house_has_power()
         elif next_location == "outside":
