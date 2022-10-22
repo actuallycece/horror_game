@@ -259,6 +259,10 @@ def dining_room():
     global eaten_dinner
     print(
         "The dining room has the same carpet as the living room, with a long table, five chairs, and six placemats. There's a Turkey in the middle of the table, along with some greens, sweet potato pie, ham, mashed potatoes, corn, and candy yams.")
+    return "eat dinner"
+
+
+def eat_dinner():
     if eaten_dinner is False:
         print("Eat Thanksgiving dinner?")
         valid_options = ["yes", "no"]
@@ -420,8 +424,7 @@ def cellar():
 
 def upstairs():
     global next_location
-
-    print()
+    print("")
 
 
 def main():
@@ -451,6 +454,8 @@ def main():
             next_location = drink_drink()
         elif next_location is "inside dining room":
             next_location = dining_room()
+        elif next_location is "eat dinner":
+            next_location = eat_dinner()
         elif next_location is "inside cellar":
             next_location = cellar()
         elif next_location is "go upstairs":
