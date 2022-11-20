@@ -442,7 +442,27 @@ def cellar():
 
 def upstairs():
     global next_location
-    print("")
+    print("Walking up the stairs, you can see the old drawings you and your siblings did as kids on the walls. One that you know *** did in particular. This makes you sad, but you keep walking. ")
+    user__response = input("")
+    return "top of stairs"
+
+
+def top_of_the_stairs():
+    global next_location
+    print("You're at the top of the stairs, here are all of the rooms. You can see 'your room', '01101101 01101001 01100001's room' 'michael and brayan's room', 'ma and pa's room', and a 'bathroom'")
+    print("Where would you like to go?")
+    valid_options = ["my room", "01101101 01101001 01100001's room", "michael and brayan's room", "ma and pa's room", "bathroom"]
+    where_upstairs = get_user_selection(valid_options)
+    if where_upstairs == "my room":
+        return "my room"
+    elif where_upstairs == "01101101 01101001 01100001's room":
+        return "mias room"
+    elif where_upstairs == "michael and brayan's room":
+        return "brothers room"
+    elif where_upstairs == "ma and pa's room":
+        return "parents room"
+    elif where_upstairs == "bathroom":
+        return "upstairs bathroom"
 
 
 def main():
@@ -477,6 +497,20 @@ def main():
             next_location = cellar()
         elif next_location == "go upstairs":
             next_location = upstairs()
+        elif next_location == "top of stairs":
+            next_location =top_of_the_stairs()
+         elif next_location == "my room":
+            next_location = my_room()
+         elif next_location == "mias room":
+            next_location = mias_room()
+         elif next_location == "brothers room":
+            next_location = brothers_room()
+         elif next_location == "parents room":
+            next_location = parents_room()
+         elif next_location == "master bed bathroom":
+            next_location = master_bed_bathroom()
+         elif next_location == "upstairs bathroom":
+            next_location = upstairs_bathroom()
         else:
             print("Error")
             game_running = False
