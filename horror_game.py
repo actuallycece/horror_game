@@ -176,9 +176,9 @@ def house_has_power():
 def user_outside():
     global next_location
     global house_power
-    print("You are outside you can see the 'car' and the 'generator to the left of the house.")
+    print("You are outside you can see the 'car', 'house' and the 'generator' to the left of the house.")
     print("Go to:")
-    valid_options = ["car", "generator"]
+    valid_options = ["car", "house", "generator"]
     car_or_gen = get_user_selection(valid_options)
     if car_or_gen == "car":
         return "inside car"
@@ -192,6 +192,8 @@ def user_outside():
         elif turn_on_gen == "no":
             house_power = False
             return "generator"
+    elif car_or_gen == "house":
+        return "inside house"
 
 
 def inside_house():
@@ -235,7 +237,7 @@ def entryway():
     elif go_into_lkd == "dining room":
         return "inside dining room"
     elif go_into_lkd == "upstairs":
-        return "going upstairs"
+        return "go upstairs"
 
 
 def living_room():
@@ -449,9 +451,9 @@ def upstairs():
 
 def top_of_the_stairs():
     global next_location
-    print("You're at the top of the stairs, here are all of the rooms. You can see 'your room', '01101101 01101001 01100001's room', 'michael and brayan's room', 'ma and pa's room', and a 'bathroom'")
+    print("You're at the top of the stairs, here are all of the rooms. You can see 'your room', '01101101 01101001 01100001's room', 'michael and brayan's room', and 'ma and pa's room'")
     print("Where would you like to go?")
-    valid_options = ["my room", "01101101 01101001 01100001's room", "michael and brayan's room", "ma and pa's room", "bathroom"]
+    valid_options = ["my room", "01101101 01101001 01100001's room", "michael and brayan's room", "ma and pa's room"]
     where_upstairs = get_user_selection(valid_options)
     if where_upstairs == "my room":
         return "my room"
@@ -461,8 +463,6 @@ def top_of_the_stairs():
         return "brothers room"
     elif where_upstairs == "ma and pa's room":
         return "parents room"
-    elif where_upstairs == "bathroom":
-        return "upstairs bathroom"
 
 
 def my_room():
@@ -684,7 +684,7 @@ def taking_mia():
 
 def main():
     game_running = True
-    next_location = scary_game_soq()
+    next_location = entryway()
     while game_running == True:
         if next_location == "start game":
             next_location = start_of_game()
@@ -725,10 +725,8 @@ def main():
         elif next_location == "brothers room":
             next_location = brothers_room()
         elif next_location == "parents room":
-            next_location = master_bed_bathroom()
-        elif next_location == "upstairs bathroom":
-            next_location = upstairs_bathroom()
-        elif next_location == "new game":
+            next_location = parents_room()
+        elif next_location == "new game"
             next_location = new_game()
         elif next_location == "in car party":
             next_location = in_car_party()
