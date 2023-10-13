@@ -40,7 +40,7 @@ def scary_game_soq():
     valid_options = ["start", "quit"]
     scary_soq = get_user_selection(valid_options)
     if scary_soq == "start":
-        return
+        return "start game"
     elif scary_soq == "quit":
         exit()
 
@@ -320,7 +320,7 @@ def kitchen():
 def drink_drink():
     global next_location
     global user_sick
-    print("Would you like to drink a drink?")
+    print("Would you like to drink the drink?")
     valid_options = ["yes", "no"]
     drink_the_drink = get_user_selection(valid_options)
     if drink_the_drink == "yes":
@@ -449,7 +449,7 @@ def upstairs():
 
 def top_of_the_stairs():
     global next_location
-    print("You're at the top of the stairs, here are all of the rooms. You can see 'your room', '01101101 01101001 01100001's room' 'michael and brayan's room', 'ma and pa's room', and a 'bathroom'")
+    print("You're at the top of the stairs, here are all of the rooms. You can see 'your room', '01101101 01101001 01100001's room', 'michael and brayan's room', 'ma and pa's room', and a 'bathroom'")
     print("Where would you like to go?")
     valid_options = ["my room", "01101101 01101001 01100001's room", "michael and brayan's room", "ma and pa's room", "bathroom"]
     where_upstairs = get_user_selection(valid_options)
@@ -465,11 +465,230 @@ def top_of_the_stairs():
         return "upstairs bathroom"
 
 
+def my_room():
+    global next_location
+    print("You step into your room and its exatly like you left it, this calms you. You look around and see your desk and computer in front of you, your bed to the right side of the room agaisnt the wall with you night stands on both side of it, and to the left is your old dirty laudry and closet which is all pack up in boxes...things are not how you left them.")
+    user__response = input("")
+    print("You start to notice you bed is covered in a blood like substance but its very tar like in texture. The floor is covered in alocohol and theres a note on the nightstand.")
+    user__response = input("")
+    print("Where would you like to go?")
+    valid_options = ["bed", "computer"]
+    in_my_room = get_user_selection(valid_options)
+    if in_my_room == "bed":
+        print("You start walking up to the bed and you start feeling tipsy, and then drunk, and then...you stumble. ")
+        user__response = input("")
+        print("You start thinking that taking a rest in bed might be good for you.")
+        print("Rest in bed?")
+        valid_options = ["yes"]
+        rest = get_user_selection(valid_options)
+        if rest == "yes":
+            print("You lay down in the bed and begin dreaming...'Im sorry Mia' 'Im so sorry Mia' you begin saying over and over again")
+            user__response = input("")
+            print("Wake up?")
+            valid_options = ["yes"]
+            wake_up = get_user_selection(valid_options)
+            if wake_up == "yes":
+                print("She cant wake up")
+                user__response = input("")
+                print("....")
+                user__response = input("")
+                print("........")
+                user__response = input("")
+                print("...")
+                user__response = input("")
+                return "new game"
+    elif in_my_room == "computer":
+        print("You walk up to the computer and notice your favorite game is still inside of it.")
+        user__response = input("")
+        print("Play game?")
+        valid_options = ["yes", "no"]
+        play_game = get_user_selection(valid_options)
+        if play_game == "yes":
+            return "new game"
+        elif play_game == "no":
+            print("Go the bed?")
+            valid_options = ["yes"]
+            go_to_bed = get_user_selection(valid_options)
+            if go_to_bed == "yes":
+                print("You get up for the computer and walk up to the bed you can see a 'note' on the bedside table.")
+                user__response = input("")
+                print("Read the note?")
+                valid_options = ["yes", "no"]
+                read_room_note = get_user_selection(valid_options)
+                if read_room_note == "yes":
+                    print("You have to wake up.")
+                    user__response = input("")
+                    print("This note makes you weary you decide to take a nap on the bed.")
+                    user__response = input("")
+                    return "new game"
+                elif read_room_note == "no":
+                    print("You decide not to read the room note, bute you decide to take a nap on the bed")
+                    user__response = input("")
+                    return "new game"
+
+
+def mias_room():
+    global next_location
+    print("What have you done")
+    user__response = input("")
+    print("Your a terrible person")
+    user__response = input("")
+    print("How could you she was your sister")
+    user__response = input("")
+    print("....")
+    user__response = input("")
+    return "top of stairs"
+
+
+def brothers_room():
+    global next_location
+    print("You walk into your Brothers old room, you feel like you should be in here but you see a 'note' on the bed")
+    user__response = input("")
+    print("Read the note?")
+    valid_options = ["yes", "no"]
+    read_brothers_note = get_user_selection(valid_options)
+    if read_brothers_note == "yes":
+        print("When he wakes up we're gonna tear him limb from limb")
+        user__response = input("")
+        print("You decide to leave the room as this note terrifies you")
+        return "top of stairs"
+    elif read_brothers_note == "no":
+        print("You decide not to read the note as being in this room already makes you feel weird, you decide to leave.")
+        return "top of stairs"
+
+
+def parents_room():
+    global next_location
+    global user_sick
+    print("You walk into your parents room, in the middle on the room you can see their bed and to the left the bathroom.")
+    user__response = input("")
+    if user_sick:
+        print("You start feeling sick and run straight to the bathroom.")
+        user__response = input("")
+        print("As you are vomiting you vomit up a note.")
+        user__response = input("")
+        print("Read the note?")
+        valid_options = ["yes", "no"]
+        read_sick_note = get_user_selection(valid_options)
+        if read_sick_note == "yes":
+            print("Mia was closest to us, our only daughter, how could you. Please were begging you to wake up.")
+            user__response = input("")
+            print("This note makes you terrified so you decide to leave the room")
+            user__response = input("")
+            return "top of stairs"
+        elif read_sick_note == "no":
+            print("You decide not to read the note as its covered in puke.")
+            user__response = input("")
+            print("When you are done you decide the coming in here was the wrong idea and decide to leave.")
+            user__response = input("")
+            return "top of stairs"
+    elif user_sick == False:
+        print("You feel a strong urge to leave this room as you start to remember what you did.")
+        user__response = input("")
+        return "top of stairs"
+
+
+def new_game():
+    global next_location
+    print("As you drive down the street, your happiness creeps up. You are excited to see the house. You've signed yourself up for whatever will greet you.")
+    user__response = input("")
+    print("You pull up to the driveway and are excited to join the party. Its your 25th birthday, what gifts will you get, whos going to be there, all these questions arise in your head. ")
+    user__response = input("")
+    return "in car party"
+
+
+def in_car_party():
+    global next_location
+    valid_options = ["look around", "get out of car"]
+    car_options = get_user_selection(valid_options)
+    if car_options == "look around":
+        print("You look around, theres balloons and and streamers everywhere and a banner that reads out 'Happy 25th Birthday Ian!'")
+        user__response = input("")
+        print("You get out of the car and start walking to the door.")
+        user__response = input("")
+        return "inside party"
+    elif car_options == "get out of car":
+        print("You get out of the car and start walking to the door.")
+        user__response = input("")
+        return "inside party"
+
+
+def inside_party():
+    global next_location
+    print("As you are walking up to the door your Ma and Pa greet you with huge smiles on their faces, 'Welcome home son, and Happy Birthday.' says Ma 'We love you' says Pa")
+    user__response = input("")
+    print("Pa begins pulling something from behind his back, its a gift!")
+    user__response = input("")
+    print("'We are so proud of you for finishing college and everything else youve done in this life, this is just for you' says Pa")
+    user__response = input("")
+    print("You open the gift, its a bottle of your favorite drink, 'Hennessy Timeless Cognac' your excited to have some.")
+    user__response = input("")
+    print("You walk inside and you are greeted by a few of your college peers, old highschool friends, along with the rest of your family of course. Ma, Pa, Bryan, Michael, and Mia.")
+    user__response = input("")
+    print("You thank Ma for all the cooking shes done, you can see ham and many other things she cooked just for you. You also take a couple shots of your new drink with friends.")
+    user__response = input("")
+    print("You decide to go down to the cellar to grab another bottle, you stumble a few times but never fall. You open the box from your gift one more time before Mia calls you from upstairs.")
+    user__response = input("")
+    print("Mia asks if you can take her home as you promised you would so she can get to class on time tomorrow.")
+    user__response = input("")
+    return "take mia"
+
+
+def take_mia():
+    global next_location
+    print("Take Mia home?")
+    valid_options = ["yes", "no"]
+    take_mia = get_user_selection(valid_options)
+    if take_mia == "yes":
+        print("You tell Mia of course you can take her, and we should go right now so you can still enjoy the party.")
+        user__response = input("")
+        return "taking mia"
+    elif take_mia == "no":
+        return "take mia"
+
+
+def taking_mia():
+    global next_location
+    print("You both head to the car, your feeling a little drunk but nothing a little water cant fix.")
+    user__response = input("")
+    print("About a minute down the road you begin opening your water bottle with one hand and fail miserably...")
+    user__response = input("")
+    print("..you hit a tree....")
+    user__response = input("")
+    print("Mia is impaled by a branch, not breathing.")
+    user__response = input("")
+    print("Your pretty much unscaved, you stare into the abyss for a second")
+    user__response = input("")
+    print("......")
+    user__response = input("")
+    print("..........")
+    user__response = input("")
+    print("You begin hearing sirens")
+    user__response = input("")
+    print("You grab the brandy bottle and throw it as far as possible")
+    user__response = input("")
+    print("You burst open the car door and get out and begin trying to walk but its hard, you collapse to the ground and hit you head and.....")
+    user__response = input("")
+    print("......")
+    user__response = input("")
+    print("........")
+    user__response = input("")
+    print("....")
+    user__response = input("")
+    print("'Hes waking up!' 'Get the nurse!'")
+    user__response = input("")
+    print("'Now tell us what happened' says Pa")
+    user__response = input("")
+    print("Game Over")
+
+
 def main():
     game_running = True
-    next_location = entryway()
+    next_location = scary_game_soq()
     while game_running == True:
-        if next_location == "inside car":
+        if next_location == "start game":
+            next_location = start_of_game()
+        elif next_location == "inside car":
             next_location = in_car()
         elif next_location == "keys":
             next_location = get_keys()
@@ -498,19 +717,27 @@ def main():
         elif next_location == "go upstairs":
             next_location = upstairs()
         elif next_location == "top of stairs":
-            next_location =top_of_the_stairs()
-         elif next_location == "my room":
+            next_location = top_of_the_stairs()
+        elif next_location == "my room":
             next_location = my_room()
-         elif next_location == "mias room":
+        elif next_location == "mias room":
             next_location = mias_room()
-         elif next_location == "brothers room":
+        elif next_location == "brothers room":
             next_location = brothers_room()
-         elif next_location == "parents room":
-            next_location = parents_room()
-         elif next_location == "master bed bathroom":
+        elif next_location == "parents room":
             next_location = master_bed_bathroom()
-         elif next_location == "upstairs bathroom":
+        elif next_location == "upstairs bathroom":
             next_location = upstairs_bathroom()
+        elif next_location == "new game":
+            next_location = new_game()
+        elif next_location == "in car party":
+            next_location = in_car_party()
+        elif next_location == "inside party":
+            next_location = inside_party()
+        elif next_location == "take mia":
+            next_location = take_mia()
+        elif next_location == "taking mia":
+            next_location = taking_mia()
         else:
             print("Error")
             game_running = False
